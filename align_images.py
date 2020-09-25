@@ -25,8 +25,11 @@ def main(args):
 
     landmarks_model_path = unpack_bz2(get_file('shape_predictor_68_face_landmarks.dat.bz2',
                                                LANDMARKS_MODEL_URL, cache_subdir='temp'))
-    RAW_IMAGES_DIR = sys.argv[1]
-    ALIGNED_IMAGES_DIR = sys.argv[2]
+    print('called align_images with args', args)
+    RAW_IMAGES_DIR = args[0]
+    ALIGNED_IMAGES_DIR = args[1]
+    print(RAW_IMAGES_DIR)
+    print(ALIGNED_IMAGES_DIR)
 
     landmarks_detector = LandmarksDetector(landmarks_model_path)
     for img_name in [x for x in os.listdir(RAW_IMAGES_DIR) if x[0] not in '._']:
