@@ -17,8 +17,7 @@ def unpack_bz2(src_path):
         fp.write(data)
     return dst_path
 
-
-if __name__ == "__main__":
+def main(args):
     """
     Extracts and aligns all faces from images using DLib and a function from original FFHQ dataset preparation step
     python align_images.py /raw_images /aligned_images
@@ -37,3 +36,7 @@ if __name__ == "__main__":
             aligned_face_path = os.path.join(ALIGNED_IMAGES_DIR, face_img_name)
             os.makedirs(ALIGNED_IMAGES_DIR, exist_ok=True)
             image_align(raw_img_path, aligned_face_path, face_landmarks)
+
+if __name__ == "__main__":
+    main(sys.argv[1:])
+    
