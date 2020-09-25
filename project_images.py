@@ -4,6 +4,7 @@ import argparse
 import os
 import shutil
 import numpy as np
+import sys
 
 import dnnlib
 import dnnlib.tflib as tflib
@@ -77,7 +78,7 @@ def render_video(src_file, dst_dir, tmp_dir, num_frames, mode, size, fps, codec,
     video_clip.write_videofile(filename, fps=fps, codec=codec, bitrate=bitrate)
 
 
-def main():
+def main(args):
     parser = argparse.ArgumentParser(description='Project real-world images into StyleGAN2 latent space')
     parser.add_argument('src_dir', help='Directory with aligned images for projection')
     parser.add_argument('dst_dir', help='Output directory')
@@ -94,7 +95,7 @@ def main():
     parser.add_argument('--video-fps', type=int, default=25, help='Video framerate')
     parser.add_argument('--video-codec', default='libx264', help='Video codec')
     parser.add_argument('--video-bitrate', default='5M', help='Video bitrate')
-    args = parser.parse_args()
+    args = parser.parse_args(args)
 
     print('Loading networks from "%s"...' % args.network_pkl)
     _G, _D, Gs = pretrained_networks.load_networks(args.network_pkl)
@@ -119,4 +120,4 @@ def main():
 
 
 if __name__ == '__main__':
-    main()
+    main(sys.argv[1:])
