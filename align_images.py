@@ -10,12 +10,12 @@ from ffhq_dataset.landmarks_detector import LandmarksDetector
 LANDMARKS_MODEL_URL = 'http://dlib.net/files/shape_predictor_68_face_landmarks.dat.bz2'
 
 
-def unpack_bz2(src_path):
-    data = bz2.BZ2File(src_path).read()
-    dst_path = src_path[:-4]
-    with open(dst_path, 'wb') as fp:
-        fp.write(data)
-    return dst_path
+# def unpack_bz2(src_path):
+#     data = bz2.BZ2File(src_path).read()
+#     dst_path = src_path[:-4]
+#     with open(dst_path, 'wb') as fp:
+#         fp.write(data)
+#     return dst_path
 
 def main(args):
     """
@@ -23,13 +23,13 @@ def main(args):
     python align_images.py /raw_images /aligned_images
     """
 
-    landmarks_model_path = unpack_bz2(get_file('shape_predictor_68_face_landmarks.dat.bz2',
-                                               LANDMARKS_MODEL_URL, cache_subdir='temp'))
-    print('called align_images with args', args)
-    RAW_IMAGES_DIR = args[0]
-    ALIGNED_IMAGES_DIR = args[1]
-    print(RAW_IMAGES_DIR)
-    print(ALIGNED_IMAGES_DIR)
+#     landmarks_model_path = unpack_bz2(get_file('shape_predictor_68_face_landmarks.dat.bz2',
+#                                                LANDMARKS_MODEL_URL, cache_subdir='temp'))
+#     print('called align_images with args', args)
+#     RAW_IMAGES_DIR = args[0]
+#     ALIGNED_IMAGES_DIR = args[1]
+#     print(RAW_IMAGES_DIR)
+#     print(ALIGNED_IMAGES_DIR)
 
     landmarks_detector = LandmarksDetector(landmarks_model_path)
     for img_name in [x for x in os.listdir(RAW_IMAGES_DIR) if x[0] not in '._']:
